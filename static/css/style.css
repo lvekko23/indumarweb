@@ -1,0 +1,100 @@
+/* FUENTES Y BASE */
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* HERO SECTION CON PARALLAX */
+.hero-section {
+    height: 90vh;
+    background: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1920') no-repeat center center/cover;
+    background-attachment: fixed; /* Efecto Parallax */
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Oscurece la foto para leer texto */
+}
+
+/* TARJETAS DE ÁMBITOS */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+
+.img-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-img-top {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1); /* Zoom al pasar el mouse */
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 193, 7, 0.8); /* Color amarillo Indumar */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .img-overlay {
+    opacity: 1;
+}
+
+.linea-decorativa {
+    width: 60px;
+    height: 4px;
+    background-color: #ffc107;
+}
+
+/* ICONOS CONTACTO */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* BOTON WHATSAPP */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 60px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+    color: white;
+}

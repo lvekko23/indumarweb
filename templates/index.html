@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ empresa.nombre }} | Ingeniería y Montajes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary: #ffc107; --dark: #111111; --dark-grey: #212529; }
+        body { font-family: 'Roboto', sans-serif; color: #444; background-color: #fff; }
+        h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; }
+
+        /* NAVBAR */
+        .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
+        .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; }
+        .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
+        .btn-nav { background: var(--primary); color: var(--dark) !important; font-weight: 700; border-radius: 0; }
+
+        /* HERO SLIDER */
+        .hero { 
+            height: 90vh; 
+            position: relative;
+            display: flex; 
+            align-items: center; 
+            background-color: #000;
+            overflow: hidden;
+        }
+        .hero-slider-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+            z-index: 0;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .hero-slider-img.fade-out { opacity: 0.2; }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)); 
+            z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; width: 100%; }
+        .hero-line { width: 80px; height: 6px; background: var(--primary); margin-bottom: 25px; }
+        .hero-subtitle { color: var(--primary); letter-spacing: 3px; font-weight: 700; }
+        .hero-title { color: white; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+        /* ESTADISTICAS */
+        .stats-section { background: var(--primary); color: var(--dark); padding: 45px 0; margin-top: -60px; position: relative; z-index: 10; border-radius: 4px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .stat-number { font-size: 2.5rem; font-weight: 800; }
+        .stat-text { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; opacity: 0.9; }
+
+        /* TARJETAS DE SERVICIOS */
+        .card-service { border: 1px solid #e0e0e0; background: white; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow: hidden; border-bottom: 4px solid transparent; }
+        .card-service:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-bottom-color: var(--primary); }
+        .card-img-wrapper { height: 220px; overflow: hidden; position: relative; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .card-service:hover .card-img-wrapper img { transform: scale(1.1); }
+        .card-service a { text-decoration: none; border-bottom: 2px solid var(--primary); padding-bottom: 2px; transition: 0.3s; color: var(--dark); font-weight: 700; font-size: 0.85rem;}
+        .card-service:hover a { color: var(--primary); border-color: transparent; }
+        
+        /* SECCIÓN INDUSTRIAS */
+        .bg-dark-section { background-color: var(--dark-grey); color: white; }
+        .industry-card-dark { background: #2c3034; padding: 40px 30px; border-radius: 8px; text-align: center; transition: all 0.3s ease; border-bottom: 5px solid transparent; height: 100%; }
+        .industry-card-dark:hover { transform: translateY(-15px); background: #343a40; border-bottom-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .industry-icon-large { font-size: 4.5rem; color: var(--primary); margin-bottom: 25px; display: inline-block; transition: 0.3s; }
+        .industry-card-dark:hover .industry-icon-large { transform: scale(1.1); }
+
+        /* FOOTER */
+        footer { background: #0b0b0b; color: #888; padding: 70px 0 20px; font-size: 0.9rem; }
+        footer a { color: #888; text-decoration: none; }
+        footer a:hover { color: var(--primary); }
+        
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
+                <i class="fa-solid fa-industry text-warning fa-lg"></i> 
+                <span class="fw-bold fs-4 text-dark">INDUMAR</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('home') }}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tipos-trabajo">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('proyectos') }}">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-nav px-4 py-2" href="{{ url_for('contacto') }}">SOLICITAR COTIZACIÓN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="hero-slider-img" style="background-image: url('/static/galeria/portada.jpg');"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="hero-line"></div>
+                    <h5 class="hero-subtitle mb-3">INGENIERÍA Y MONTAJES</h5>
+                    <h1 class="display-3 hero-title mb-4">Especialistas en Instalaciones Industriales y Sanitarias.</h1>
+                    <p class="lead mb-5 text-white opacity-90" style="max-width: 700px; font-weight: 400;">
+                        Montaje de plantas, circuitos CIP y tratamiento de agua con estándares de calidad para industrias exigentes.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#tipos-trabajo" class="btn btn-warning px-5 py-3 fw-bold text-dark rounded-0 shadow">VER SERVICIOS</a>
+                        <a href="{{ url_for('contacto') }}" class="btn btn-outline-light px-5 py-3 fw-bold rounded-0">SOLICITAR COTIZACIÓN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row stats-section mx-1 mx-lg-0 text-center justify-content-center">
+            {% for stat in stats %}
+            <div class="col-4 col-md-3 mb-4 mb-md-0 {% if not loop.last %}border-end border-dark border-opacity-10{% endif %}">
+                <div class="stat-number">{{ stat.numero }}</div>
+                <div class="stat-text">{{ stat.texto }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <section id="tipos-trabajo" class="py-5" style="margin-top: 60px;">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h6 class="text-uppercase text-warning fw-bold ls-2">Nuestra Oferta Técnica</h6>
+                <h2 class="display-5 fw-bold text-dark">Tipos de Trabajo</h2>
+                <div class="d-flex justify-content-center mt-3"><div style="width: 60px; height: 4px; background: var(--primary);"></div></div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                {% for servicio in servicios %}
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+                    <div class="card card-service">
+                        <div class="card-img-wrapper">
+                            <img src="{{ servicio.img }}" alt="{{ servicio.titulo }}">
+                        </div>
+                        <div class="card-body p-4">
+                            <h4 class="card-title fw-bold mb-3 text-dark">{{ servicio.titulo }}</h4>
+                            <p class="card-text text-secondary mb-4 small">{{ servicio.desc }}</p>
+                            <a href="{{ url_for('contacto') }}">MÁS DETALLES</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="industrias" class="py-5 bg-dark-section text-white">
+        <div class="container py-5">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <h6 class="text-uppercase text-warning fw-bold ls-2">Sectores Clave</h6>
+                    <h2 class="display-4 fw-bold">Industrias que Atendemos</h2>
+                    <p class="lead opacity-75 mt-3">Experiencia comprobada en normativas GMP, FDA y exigencias sanitarias y navales.</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-4">
+                {% for industria in industrias %}
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ loop.index * 150 }}">
+                    <div class="industry-card-dark">
+                        <i class="fa-solid {{ industria.icono }} industry-icon-large"></i>
+                        <h3 class="fw-bold mb-3 text-white">{{ industria.nombre }}</h3>
+                        <p class="text-light opacity-75 mb-0">{{ industria.desc }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-white border-bottom">
+        <div class="container py-5 text-center" data-aos="fade-up">
+            <h2 class="fw-bold mb-5 text-dark">Garantía de Ejecución</h2>
+            <div class="row justify-content-center gap-4 gap-lg-0">
+                <div class="col-md-4 border-end"><i class="fa-solid fa-certificate text-warning fa-3x mb-3"></i><h5 class="fw-bold">Soldaduras Calificadas</h5></div>
+                <div class="col-md-4 border-end"><i class="fa-solid fa-file-circle-check text-warning fa-3x mb-3"></i><h5 class="fw-bold">Documentación Final</h5></div>
+                <div class="col-md-4"><i class="fa-solid fa-stopwatch text-warning fa-3x mb-3"></i><h5 class="fw-bold">Cumplimiento de Plazos</h5></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container py-5 text-center">
+            <h2 class="display-6 fw-bold mb-4">¿Tiene un proyecto en mente?</h2>
+            <p class="text-secondary mb-5">Solicite un relevamiento técnico o presupuesto sin cargo.</p>
+            <a href="{{ url_for('contacto') }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold rounded-0 shadow">SOLICITAR COTIZACIÓN</a>
+        </div>
+    </section>
+
+    <footer class="bg-black">
+        <div class="container">
+            <div class="row gy-4 border-bottom border-secondary border-opacity-25 pb-5 mb-4">
+                <div class="col-md-4">
+                    <h5 class="text-white mb-4 fw-bold">INDUMAR</h5>
+                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial.</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
+                    <p class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i> {{ empresa.telefono }}</p>
+                    <p class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i> {{ empresa.email }}</p>
+                    <p class="mb-0"><i class="fa-solid fa-location-dot text-warning me-2"></i> Buenos Aires, Argentina</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
+                    <ul class="list-unstyled fw-medium">
+                        <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                        <li><a href="#tipos-trabajo">Servicios</a></li>
+                        <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
+                        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center pb-4 opacity-50 small">© 2026 {{ empresa.nombre }}. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <a href="{{ empresa.whatsapp_link }}" class="whatsapp-float shadow" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> AOS.init({ duration: 800, once: true, offset: 100 }); </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = [
+                '/static/galeria/portada.jpg',
+                '/static/galeria/portada1.jpg',
+                '/static/galeria/portada2.jpg',
+                '/static/galeria/portada3.jpg',
+                '/static/galeria/portada4.jpg'
+            ];
+
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            let currentIndex = 0;
+            const sliderImg = document.querySelector('.hero-slider-img');
+
+            function cycleImages() {
+                sliderImg.classList.add('fade-out');
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    sliderImg.style.backgroundImage = `url('${images[currentIndex]}')`;
+                    sliderImg.classList.remove('fade-out');
+                }, 500);
+            }
+            setInterval(cycleImages, 3000);
+        });
+    </script>
+</body>
+</html>

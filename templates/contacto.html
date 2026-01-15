@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | INDUMAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary: #ffc107; --dark: #111111; }
+        body { font-family: 'Roboto', sans-serif; background-color: #fff; }
+        h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; }
+
+        /* NAVBAR */
+        .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
+        .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; }
+        .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
+        .btn-nav { background: var(--primary); color: var(--dark) !important; font-weight: 700; border-radius: 0; }
+
+        /* HEADER CONTACTO */
+        .contact-header {
+            background: #111;
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+
+        /* TARJETAS DE INFO */
+        .info-card {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: 0.3s;
+            position: relative;
+        }
+        .info-card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--primary); }
+        .icon-circle {
+            width: 70px; height: 70px;
+            background: #fff8e1;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+
+        /* Enlaces de las tarjetas */
+        .card-link {
+            text-decoration: none;
+            color: #111;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .card-link:hover { color: var(--primary); }
+
+        /* FORMULARIO */
+        .form-control { padding: 15px; border-radius: 0; border: 1px solid #ddd; background: #f9f9f9; }
+        .form-control:focus { border-color: var(--primary); box-shadow: none; background: white; }
+        .btn-send { background: var(--primary); color: var(--dark); font-weight: 700; padding: 15px 40px; border: none; border-radius: 0; transition: 0.3s; }
+        .btn-send:hover { background: #e0a800; transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer { background: #0b0b0b; color: #888; padding: 70px 0 20px; font-size: 0.9rem; }
+        footer a { color: #888; text-decoration: none; }
+        footer a:hover { color: var(--primary); }
+
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
+                <i class="fa-solid fa-industry text-warning fa-lg"></i> 
+                <span class="fw-bold fs-4 text-dark">INDUMAR</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#tipos-trabajo">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('proyectos') }}">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('contacto') }}">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="contact-header">
+        <div class="container" data-aos="fade-up">
+            <h1 class="fw-bold display-5">Contáctenos</h1>
+            <p class="opacity-75 mb-0">Estamos listos para cotizar su próximo proyecto.</p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                
+                <div class="col-lg-4">
+                    <div class="d-flex flex-column gap-4">
+                        
+                        <div class="info-card" data-aos="fade-up">
+                            <div class="icon-circle"><i class="fa-brands fa-whatsapp fs-3"></i></div>
+                            <h5 class="fw-bold">WhatsApp Directo</h5>
+                            <p class="text-secondary mb-0">Atención Personalizada</p>
+                            <a href="{{ empresa.whatsapp_link }}" target="_blank" class="card-link">
+                                {{ empresa.telefono }} <i class="fa-solid fa-arrow-up-right-from-square small ms-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon-circle"><i class="fa-solid fa-envelope fs-4"></i></div>
+                            <h5 class="fw-bold">Escríbanos</h5>
+                            <p class="text-secondary mb-0">Solicite presupuesto por email</p>
+                            <a href="mailto:{{ empresa.email }}" class="card-link">
+                                {{ empresa.email }}
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-8" data-aos="fade-left">
+                    <div class="bg-light p-5 border">
+                        <h3 class="fw-bold mb-4">Envíenos un mensaje</h3>
+                        
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                            {% for category, message in messages %}
+                              <div class="alert alert-{{ category }} rounded-0 mb-4">{{ message }}</div>
+                            {% endfor %}
+                          {% endif %}
+                        {% endwith %}
+
+                        <form action="{{ url_for('contacto') }}" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="nombre" class="form-control" placeholder="Su Nombre" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Su Email" required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="asunto" class="form-control" placeholder="Asunto" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="mensaje" rows="5" class="form-control" placeholder="¿En qué podemos ayudarlo?" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-send w-100">ENVIAR CONSULTA</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black">
+        <div class="container">
+            <div class="row gy-4 border-bottom border-secondary border-opacity-25 pb-5 mb-4">
+                <div class="col-md-4">
+                    <h5 class="text-white mb-4 fw-bold">INDUMAR</h5>
+                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial.</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
+                    <p class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i> {{ empresa.telefono }}</p>
+                    <p class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i> {{ empresa.email }}</p>
+                    <p class="mb-0"><i class="fa-solid fa-location-dot text-warning me-2"></i> Buenos Aires, Argentina</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
+                    <ul class="list-unstyled fw-medium">
+                        <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                        <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
+                        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center pb-4 opacity-50 small">© 2026 INDUMAR. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <a href="{{ empresa.whatsapp_link }}" class="whatsapp-float shadow" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> AOS.init({ duration: 800, once: true }); </script>
+</body>
+</html>
