@@ -62,7 +62,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
-                <img src="/static/img/logo-indumar.jpeg" alt="INDUMAR Logo" class="logo-img">
+                <img src="{{ url_for('static', filename='logo-indumar.png') }}" alt="INDUMAR Logo" class="logo-img">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -124,7 +124,7 @@
         <div class="container">
             <div class="row gy-4 border-bottom border-secondary border-opacity-25 pb-5 mb-4">
                 <div class="col-md-4">
-                    <img src="/static/img/logo-indumar.jpeg" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
+                    <img src="{{ url_for('static', filename='logo-indumar.png') }}" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
                     <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial especializado.</p>
                 </div>
                 
@@ -145,7 +145,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="text-center pb-4 opacity-50 small">© 2026 {{ empresa.nombre }}. Todos los derechos reservados.</div>
+            <div class="text-center pb-4 opacity-50 small">© 2026 INDUMAR. Todos los derechos reservados.</div>
         </div>
     </footer>
 

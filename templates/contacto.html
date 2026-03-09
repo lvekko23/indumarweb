@@ -10,22 +10,24 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        :root { --primary: #ffc107; --dark: #111111; }
-        body { font-family: 'Roboto', sans-serif; background-color: #fff; }
+        /* NUEVOS COLORES AZULES */
+        :root { --dark: #111111; --indumar-blue: #62b1f6; --indumar-darkblue: #002244; }
+        body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; }
         h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; }
 
-        /* NAVBAR */
+        /* NAVBAR CON LOGO NUEVO */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
-        .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; }
-        .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
-        .btn-nav { background: var(--primary); color: var(--dark) !important; font-weight: 700; border-radius: 0; }
+        .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--indumar-blue) !important; }
+        .logo-img { max-height: 45px; object-fit: contain; }
 
         /* HEADER CONTACTO */
         .contact-header {
-            background: #111;
+            background: linear-gradient(135deg, var(--indumar-darkblue) 0%, #00152b 100%);
             padding: 80px 0;
             color: white;
             text-align: center;
+            border-bottom: 5px solid var(--indumar-blue);
         }
 
         /* TARJETAS DE INFO */
@@ -33,45 +35,48 @@
             background: white;
             padding: 40px;
             text-align: center;
-            border: 1px solid #eee;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             height: 100%;
             transition: 0.3s;
-            position: relative;
+            border-bottom: 4px solid transparent;
         }
-        .info-card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--primary); }
+        .info-card:hover { transform: translateY(-5px); border-bottom-color: var(--indumar-blue); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .icon-circle {
             width: 70px; height: 70px;
-            background: #fff8e1;
-            color: var(--primary);
+            background: rgba(98, 177, 246, 0.1);
+            color: var(--indumar-blue);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 20px;
             font-size: 24px;
+            transition: 0.3s;
         }
+        .info-card:hover .icon-circle { background: var(--indumar-blue); color: white; }
 
         /* Enlaces de las tarjetas */
         .card-link {
             text-decoration: none;
-            color: #111;
+            color: var(--indumar-darkblue);
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: 0.3s;
             display: inline-block;
-            margin-top: 5px;
+            margin-top: 10px;
         }
-        .card-link:hover { color: var(--primary); }
+        .card-link:hover { color: var(--indumar-blue); }
 
         /* FORMULARIO */
-        .form-control { padding: 15px; border-radius: 0; border: 1px solid #ddd; background: #f9f9f9; }
-        .form-control:focus { border-color: var(--primary); box-shadow: none; background: white; }
-        .btn-send { background: var(--primary); color: var(--dark); font-weight: 700; padding: 15px 40px; border: none; border-radius: 0; transition: 0.3s; }
-        .btn-send:hover { background: #e0a800; transform: translateY(-2px); }
+        .form-control { padding: 15px; border-radius: 4px; border: 1px solid #ddd; background: #fff; }
+        .form-control:focus { border-color: var(--indumar-blue); box-shadow: 0 0 0 0.2rem rgba(98, 177, 246, 0.25); }
+        .btn-send { background: var(--indumar-blue); color: white; font-weight: 700; padding: 15px 40px; border: none; border-radius: 4px; transition: 0.3s; }
+        .btn-send:hover { background: var(--indumar-darkblue); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,34,68,0.2); }
 
         /* FOOTER */
-        footer { background: #0b0b0b; color: #888; padding: 70px 0 20px; font-size: 0.9rem; }
-        footer a { color: #888; text-decoration: none; }
-        footer a:hover { color: var(--primary); }
+        footer { background: var(--indumar-darkblue); color: #ccc; padding: 70px 0 20px; font-size: 0.9rem; }
+        footer a { color: #ccc; text-decoration: none; transition: 0.3s; }
+        footer a:hover { color: white; }
 
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
@@ -81,9 +86,8 @@
 
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
-                <i class="fa-solid fa-industry text-warning fa-lg"></i> 
-                <span class="fw-bold fs-4 text-dark">INDUMAR</span>
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='logo-indumar.png') }}" alt="INDUMAR Logo" class="logo-img">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -91,7 +95,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#tipos-trabajo">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#industrias">Especialidades</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('proyectos') }}">Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ url_for('contacto') }}">Contacto</a></li>
                 </ul>
@@ -114,19 +118,19 @@
                     <div class="d-flex flex-column gap-4">
                         
                         <div class="info-card" data-aos="fade-up">
-                            <div class="icon-circle"><i class="fa-brands fa-whatsapp fs-3"></i></div>
-                            <h5 class="fw-bold">WhatsApp Directo</h5>
-                            <p class="text-secondary mb-0">Atención Personalizada</p>
+                            <div class="icon-circle"><i class="fa-brands fa-whatsapp"></i></div>
+                            <h5 class="fw-bold text-dark">WhatsApp Directo</h5>
+                            <p class="text-secondary mb-0 small">Atención Personalizada</p>
                             <a href="{{ empresa.whatsapp_link }}" target="_blank" class="card-link">
-                                {{ empresa.telefono }} <i class="fa-solid fa-arrow-up-right-from-square small ms-1"></i>
+                                {{ empresa.telefono }}
                             </a>
                         </div>
                         
                         <div class="info-card" data-aos="fade-up" data-aos-delay="100">
-                            <div class="icon-circle"><i class="fa-solid fa-envelope fs-4"></i></div>
-                            <h5 class="fw-bold">Escríbanos</h5>
-                            <p class="text-secondary mb-0">Solicite presupuesto por email</p>
-                            <a href="mailto:{{ empresa.email }}" class="card-link">
+                            <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                            <h5 class="fw-bold text-dark">Escríbanos</h5>
+                            <p class="text-secondary mb-0 small">Solicite presupuesto por email</p>
+                            <a href="mailto:{{ empresa.email }}" class="card-link" style="font-size: 1rem;">
                                 {{ empresa.email }}
                             </a>
                         </div>
@@ -135,13 +139,13 @@
                 </div>
 
                 <div class="col-lg-8" data-aos="fade-left">
-                    <div class="bg-light p-5 border">
-                        <h3 class="fw-bold mb-4">Envíenos un mensaje</h3>
+                    <div class="bg-white p-5 rounded shadow-sm">
+                        <h3 class="fw-bold mb-4" style="color: var(--indumar-darkblue);">Envíenos un mensaje</h3>
                         
                         {% with messages = get_flashed_messages(with_categories=true) %}
                           {% if messages %}
                             {% for category, message in messages %}
-                              <div class="alert alert-{{ category }} rounded-0 mb-4">{{ message }}</div>
+                              <div class="alert alert-{{ category }} rounded-2 mb-4">{{ message }}</div>
                             {% endfor %}
                           {% endif %}
                         {% endwith %}
@@ -158,9 +162,9 @@
                                     <input type="text" name="asunto" class="form-control" placeholder="Asunto" required>
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="mensaje" rows="5" class="form-control" placeholder="¿En qué podemos ayudarlo?" required></textarea>
+                                    <textarea name="mensaje" rows="6" class="form-control" placeholder="¿En qué podemos ayudarlo?" required></textarea>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 mt-4">
                                     <button type="submit" class="btn btn-send w-100">ENVIAR CONSULTA</button>
                                 </div>
                             </div>
@@ -172,25 +176,26 @@
         </div>
     </section>
 
-    <footer class="bg-black">
+    <footer>
         <div class="container">
             <div class="row gy-4 border-bottom border-secondary border-opacity-25 pb-5 mb-4">
                 <div class="col-md-4">
-                    <h5 class="text-white mb-4 fw-bold">INDUMAR</h5>
-                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial.</p>
+                    <img src="{{ url_for('static', filename='logo-indumar.png') }}" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
+                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial especializado.</p>
                 </div>
                 
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
-                    <p class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i> {{ empresa.telefono }}</p>
-                    <p class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i> {{ empresa.email }}</p>
-                    <p class="mb-0"><i class="fa-solid fa-location-dot text-warning me-2"></i> Buenos Aires, Argentina</p>
+                    <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color: var(--indumar-blue);"></i> {{ empresa.telefono }}</p>
+                    <p class="mb-2"><i class="fa-solid fa-envelope me-2" style="color: var(--indumar-blue);"></i> {{ empresa.email }}</p>
+                    <p class="mb-0"><i class="fa-solid fa-location-dot me-2" style="color: var(--indumar-blue);"></i> Buenos Aires, Argentina</p>
                 </div>
                 
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
                     <ul class="list-unstyled fw-medium">
                         <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                        <li><a href="{{ url_for('home') }}#industrias">Especialidades</a></li>
                         <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
                         <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
                     </ul>
