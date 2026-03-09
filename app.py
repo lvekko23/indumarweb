@@ -27,28 +27,12 @@ INFO_EMPRESA = {
 }
 
 # --- DATOS PARA LA PÁGINA ---
-SERVICIOS = [
-    {'titulo': 'Instalaciones Industriales', 'desc': 'Montaje de cañerías de acero inoxidable y carbono para procesos críticos.', 'img': '/static/taller.jpg'},
-    {'titulo': 'Circuitos CIP', 'desc': 'Skids de limpieza automatizada para industrias alimenticias y farmacéuticas.', 'img': '/static/cip.jpg'},
-    {'titulo': 'Tratamiento de Agua', 'desc': 'Plantas de tratamiento, osmosis inversa y ablandadores industriales.', 'img': '/static/agua.jpg'},
-    {'titulo': 'Industrias Farmacéuticas', 'desc': 'Normativas GMP/FDA. Soldaduras sanitarias y documentación técnica.', 'img': '/static/farma.jpg'},
-    {'titulo': 'Fabricación y Soldadura', 'desc': 'Soldaduras especiales TIG/MIG en taller propio y montajes en planta.', 'img': '/static/instalaciones.jpg'},
-    {'titulo': 'Pre-montajes', 'desc': 'Modularidad y pre-fabricación en taller para reducir tiempos en obra.', 'img': '/static/premontaje.jpg'}
-]
+# (Borramos SERVICIOS e INDUSTRIAS porque ahora los cuadros están fijos en el HTML)
 
 STATS = [
     {'numero': 'GMP', 'texto': 'Normativas'},
-    {'numero': '24/7', 'texto': 'Soporte'},
-    {'numero': '100%', 'texto': 'Calidad'}
-]
-
-INDUSTRIAS = [
-    {'nombre': 'Alimenticia', 'icono': 'fa-utensils', 'desc': 'Lácteos, bebidas y procesados.'},
-    {'nombre': 'Farmacéutica', 'icono': 'fa-pills', 'desc': 'Laboratorios y cosmética.'},
-    {'nombre': 'Química', 'icono': 'fa-flask', 'desc': 'Reactores y fluidos peligrosos.'},
-    {'nombre': 'Naval', 'icono': 'fa-anchor', 'desc': 'Reparaciones y montajes a bordo.'},
-    {'nombre': 'Petróleo', 'icono': 'fa-oil-well', 'desc': 'Redes de incendio y piping.'},
-    {'nombre': 'Civil', 'icono': 'fa-building', 'desc': 'Estructuras metálicas y naves.'}
+    {'numero': 'ISO', 'texto': 'Certificación'},
+    {'numero': 'RINA', 'texto': 'Estándares'}
 ]
 
 # --- RUTAS ---
@@ -57,9 +41,7 @@ INDUSTRIAS = [
 def home():
     return render_template('index.html', 
                            empresa=INFO_EMPRESA, 
-                           servicios=SERVICIOS, 
-                           stats=STATS, 
-                           industrias=INDUSTRIAS)
+                           stats=STATS)
 
 @app.route('/proyectos')
 def proyectos():
@@ -75,10 +57,11 @@ def contacto():
     if request.method == 'POST':
         nombre = request.form.get('nombre')
         email_cliente = request.form.get('email')
-        asunto = request.form.get('asunto')
+        telefono = request.form.get('telefono')
+        empresa_cliente = request.form.get('empresa')
         mensaje = request.form.get('mensaje')
 
-        msg = Message(subject=f"NUEVO CLIENTE WEB: {asunto}",
+        msg = Message(subject=f"NUEVO CLIENTE WEB: {nombre}",
                       sender='contactoindumar@gmail.com',
                       recipients=['admarin74@gmail.com'])
 
@@ -88,8 +71,9 @@ def contacto():
         ------------------------------------------------------
         
         CLIENTE: {nombre}
+        EMPRESA: {empresa_cliente}
+        TELÉFONO: {telefono}
         EMAIL:   {email_cliente}
-        ASUNTO:  {asunto}
         
         MENSAJE:
         {mensaje}

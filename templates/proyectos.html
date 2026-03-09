@@ -10,19 +10,21 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        :root { --primary: #ffc107; --dark: #111111; }
+        :root { --primary: #ffc107; --dark: #111111; --indumar-blue: #62b1f6; --indumar-darkblue: #002244; }
         body { font-family: 'Roboto', sans-serif; background-color: #f9f9f9; }
         h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; }
 
         /* NAVBAR */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
         .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; }
-        .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
-        .btn-nav { background: var(--primary); color: var(--dark) !important; font-weight: 700; border-radius: 0; }
+        .nav-link:hover, .nav-link.active { color: var(--indumar-blue) !important; }
+        .btn-nav { background: var(--indumar-blue); color: white !important; font-weight: 700; border-radius: 0; transition: 0.3s;}
+        .btn-nav:hover { background: var(--indumar-darkblue); }
+        .logo-img { max-height: 45px; object-fit: contain; }
 
         /* HEADER PROYECTOS */
         .page-header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/static/galeria/portada1.jpg');
+            background: linear-gradient(rgba(0,34,68,0.8), rgba(0,0,0,0.7)), url('/static/galeria/portada1.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -41,15 +43,15 @@
             background: white;
             height: 100%;
         }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-bottom: 4px solid var(--indumar-blue);}
         .project-img-wrapper { height: 250px; overflow: hidden; position: relative; }
         .project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .project-card:hover img { transform: scale(1.1); }
         
         /* FOOTER */
-        footer { background: #0b0b0b; color: #888; padding: 70px 0 20px; font-size: 0.9rem; }
-        footer a { color: #888; text-decoration: none; }
-        footer a:hover { color: var(--primary); }
+        footer { background: var(--indumar-darkblue); color: #ccc; padding: 70px 0 20px; font-size: 0.9rem; }
+        footer a { color: #ccc; text-decoration: none; }
+        footer a:hover { color: white; }
 
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
@@ -60,8 +62,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
-                <i class="fa-solid fa-industry text-warning fa-lg"></i> 
-                <span class="fw-bold fs-4 text-dark">INDUMAR</span>
+                <img src="/static/img/logo-indumar.jpeg" alt="INDUMAR Logo" class="logo-img">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -69,7 +70,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#tipos-trabajo">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#industrias">Especialidades</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ url_for('proyectos') }}">Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
                     <li class="nav-item ms-lg-3">
@@ -83,7 +84,7 @@
     <header class="page-header">
         <div class="container" data-aos="fade-up">
             <h1 class="display-4 fw-bold">Nuestros Proyectos</h1>
-            <div style="width: 60px; height: 4px; background: var(--primary); margin: 20px auto;"></div>
+            <div style="width: 60px; height: 4px; background: var(--indumar-blue); margin: 20px auto;"></div>
             <p class="lead opacity-75">Galería de obras recientes y montajes realizados.</p>
         </div>
     </header>
@@ -119,31 +120,32 @@
         </div>
     </section>
 
-    <footer class="bg-black">
+    <footer>
         <div class="container">
             <div class="row gy-4 border-bottom border-secondary border-opacity-25 pb-5 mb-4">
                 <div class="col-md-4">
-                    <h5 class="text-white mb-4 fw-bold">INDUMAR</h5>
-                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial.</p>
+                    <img src="/static/img/logo-indumar.jpeg" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
+                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial especializado.</p>
                 </div>
                 
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
-                    <p class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i> {{ empresa.telefono }}</p>
-                    <p class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i> {{ empresa.email }}</p>
-                    <p class="mb-0"><i class="fa-solid fa-location-dot text-warning me-2"></i> Buenos Aires, Argentina</p>
+                    <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color: var(--indumar-blue);"></i> {{ empresa.telefono }}</p>
+                    <p class="mb-2"><i class="fa-solid fa-envelope me-2" style="color: var(--indumar-blue);"></i> {{ empresa.email }}</p>
+                    <p class="mb-0"><i class="fa-solid fa-location-dot me-2" style="color: var(--indumar-blue);"></i> Buenos Aires, Argentina</p>
                 </div>
                 
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
                     <ul class="list-unstyled fw-medium">
                         <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                        <li><a href="{{ url_for('home') }}#industrias">Especialidades</a></li>
                         <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
                         <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="text-center pb-4 opacity-50 small">© 2026 INDUMAR. Todos los derechos reservados.</div>
+            <div class="text-center pb-4 opacity-50 small">© 2026 {{ empresa.nombre }}. Todos los derechos reservados.</div>
         </div>
     </footer>
 

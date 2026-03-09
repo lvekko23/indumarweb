@@ -10,15 +10,17 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        :root { --primary: #ffc107; --dark: #111111; --dark-grey: #212529; }
+        :root { --primary: #ffc107; --dark: #111111; --dark-grey: #212529; --indumar-blue: #62b1f6; --indumar-darkblue: #002244; }
         body { font-family: 'Roboto', sans-serif; color: #444; background-color: #fff; }
         h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; }
 
         /* NAVBAR */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
         .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; }
-        .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
-        .btn-nav { background: var(--primary); color: var(--dark) !important; font-weight: 700; border-radius: 0; }
+        .nav-link:hover, .nav-link.active { color: var(--indumar-blue) !important; }
+        .btn-nav { background: var(--indumar-blue); color: white !important; font-weight: 700; border-radius: 0; transition: 0.3s; }
+        .btn-nav:hover { background: var(--indumar-darkblue); }
+        .logo-img { max-height: 45px; object-fit: contain; }
 
         /* HERO SLIDER */
         .hero { 
@@ -43,39 +45,33 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)); 
+            background: linear-gradient(rgba(0,34,68,0.7), rgba(0,0,0,0.6)); 
             z-index: 1;
         }
         .hero-content { position: relative; z-index: 2; width: 100%; }
-        .hero-line { width: 80px; height: 6px; background: var(--primary); margin-bottom: 25px; }
-        .hero-subtitle { color: var(--primary); letter-spacing: 3px; font-weight: 700; }
-        .hero-title { color: white; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-line { width: 80px; height: 6px; background: var(--indumar-blue); margin-bottom: 25px; }
+        .hero-subtitle { color: var(--indumar-blue); letter-spacing: 3px; font-weight: 700; text-transform: uppercase;}
+        .hero-title { color: white; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-size: 3.5rem;}
 
         /* ESTADISTICAS */
-        .stats-section { background: var(--primary); color: var(--dark); padding: 45px 0; margin-top: -60px; position: relative; z-index: 10; border-radius: 4px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-        .stat-number { font-size: 2.5rem; font-weight: 800; }
+        .stats-section { background: var(--indumar-blue); color: white; padding: 45px 0; margin-top: -60px; position: relative; z-index: 10; border-radius: 4px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .stat-number { font-size: 2.5rem; font-weight: 800; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
         .stat-text { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; opacity: 0.9; }
 
-        /* TARJETAS DE SERVICIOS */
-        .card-service { border: 1px solid #e0e0e0; background: white; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow: hidden; border-bottom: 4px solid transparent; }
-        .card-service:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-bottom-color: var(--primary); }
-        .card-img-wrapper { height: 220px; overflow: hidden; position: relative; }
-        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .card-service:hover .card-img-wrapper img { transform: scale(1.1); }
-        .card-service a { text-decoration: none; border-bottom: 2px solid var(--primary); padding-bottom: 2px; transition: 0.3s; color: var(--dark); font-weight: 700; font-size: 0.85rem;}
-        .card-service:hover a { color: var(--primary); border-color: transparent; }
-        
-        /* SECCIÓN INDUSTRIAS */
-        .bg-dark-section { background-color: var(--dark-grey); color: white; }
-        .industry-card-dark { background: #2c3034; padding: 40px 30px; border-radius: 8px; text-align: center; transition: all 0.3s ease; border-bottom: 5px solid transparent; height: 100%; }
-        .industry-card-dark:hover { transform: translateY(-15px); background: #343a40; border-bottom-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .industry-icon-large { font-size: 4.5rem; color: var(--primary); margin-bottom: 25px; display: inline-block; transition: 0.3s; }
-        .industry-card-dark:hover .industry-icon-large { transform: scale(1.1); }
+        /* SECCIÓN INDUSTRIAS (CUADROS) */
+        .bg-dark-section { background-color: #f8f9fa; color: #333; }
+        .industry-card { background: white; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 5px solid var(--indumar-blue); transition: all 0.3s ease; height: 100%; }
+        .industry-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top-color: var(--indumar-darkblue); }
+        .industry-icon-large { font-size: 3.5rem; color: var(--indumar-blue); margin-bottom: 20px; display: inline-block; }
+        .client-list { list-style: none; padding-left: 0; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; font-size: 0.9rem;}
+        .client-list li { margin-bottom: 8px; color: #555; }
+        .client-list i { color: var(--indumar-blue); margin-right: 8px; font-size: 0.8rem;}
+        .normas-badge { background: var(--indumar-darkblue); color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-right: 5px;}
 
         /* FOOTER */
-        footer { background: #0b0b0b; color: #888; padding: 70px 0 20px; font-size: 0.9rem; }
-        footer a { color: #888; text-decoration: none; }
-        footer a:hover { color: var(--primary); }
+        footer { background: var(--indumar-darkblue); color: #ccc; padding: 70px 0 20px; font-size: 0.9rem; }
+        footer a { color: #ccc; text-decoration: none; }
+        footer a:hover { color: white; }
         
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
@@ -86,8 +82,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
-                <i class="fa-solid fa-industry text-warning fa-lg"></i> 
-                <span class="fw-bold fs-4 text-dark">INDUMAR</span>
+                <img src="/static/img/logo-indumar.jpeg" alt="INDUMAR Logo" class="logo-img">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -95,7 +90,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link active" href="{{ url_for('home') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tipos-trabajo">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#industrias">Especialidades</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('proyectos') }}">Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
                     <li class="nav-item ms-lg-3">
@@ -112,16 +107,16 @@
 
         <div class="container hero-content" data-aos="fade-up">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <div class="hero-line"></div>
-                    <h5 class="hero-subtitle mb-3">INGENIERÍA Y MONTAJES</h5>
-                    <h1 class="display-3 hero-title mb-4">Especialistas en Instalaciones Industriales y Sanitarias.</h1>
-                    <p class="lead mb-5 text-white opacity-90" style="max-width: 700px; font-weight: 400;">
-                        Montaje de plantas, circuitos CIP y tratamiento de agua con estándares de calidad para industrias exigentes.
+                    <h5 class="hero-subtitle mb-3">NORMATIVA: GMP • ISO • RINA</h5>
+                    <h1 class="hero-title mb-4">Especialistas en Instalaciones para industrias Farmacéuticas y alimenticias y trabajos especiales a medida.</h1>
+                    <p class="lead mb-5 text-white opacity-90" style="max-width: 800px; font-weight: 400;">
+                        Montaje de plantas, circuitos CIP y tratamiento de agua bajo los más estrictos estándares internacionales de calidad.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="#tipos-trabajo" class="btn btn-warning px-5 py-3 fw-bold text-dark rounded-0 shadow">VER SERVICIOS</a>
-                        <a href="{{ url_for('contacto') }}" class="btn btn-outline-light px-5 py-3 fw-bold rounded-0">SOLICITAR COTIZACIÓN</a>
+                        <a href="#industrias" class="btn px-5 py-3 fw-bold text-white rounded-0 shadow" style="background-color: var(--indumar-blue);">VER ESPECIALIDADES</a>
+                        <a href="{{ url_for('contacto') }}" class="btn btn-outline-light px-5 py-3 fw-bold rounded-0">CONTÁCTENOS</a>
                     </div>
                 </div>
             </div>
@@ -131,7 +126,7 @@
     <div class="container">
         <div class="row stats-section mx-1 mx-lg-0 text-center justify-content-center">
             {% for stat in stats %}
-            <div class="col-4 col-md-3 mb-4 mb-md-0 {% if not loop.last %}border-end border-dark border-opacity-10{% endif %}">
+            <div class="col-4 col-md-3 mb-4 mb-md-0 {% if not loop.last %}border-end border-light border-opacity-25{% endif %}">
                 <div class="stat-number">{{ stat.numero }}</div>
                 <div class="stat-text">{{ stat.texto }}</div>
             </div>
@@ -139,52 +134,82 @@
         </div>
     </div>
 
-    <section id="tipos-trabajo" class="py-5" style="margin-top: 60px;">
+    <section id="industrias" class="py-5 bg-dark-section">
         <div class="container py-5">
             <div class="text-center mb-5" data-aos="fade-up">
-                <h6 class="text-uppercase text-warning fw-bold ls-2">Nuestra Oferta Técnica</h6>
-                <h2 class="display-5 fw-bold text-dark">Tipos de Trabajo</h2>
-                <div class="d-flex justify-content-center mt-3"><div style="width: 60px; height: 4px; background: var(--primary);"></div></div>
+                <h6 class="text-uppercase fw-bold ls-2" style="color: var(--indumar-blue);">Ingeniería de Precisión</h6>
+                <h2 class="display-5 fw-bold text-dark">Cuadros por Tipo de Industria</h2>
+                <div class="d-flex justify-content-center mt-3"><div style="width: 60px; height: 4px; background: var(--indumar-blue);"></div></div>
             </div>
             
-            <div class="row g-4 justify-content-center">
-                {% for servicio in servicios %}
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
-                    <div class="card card-service">
-                        <div class="card-img-wrapper">
-                            <img src="{{ servicio.img }}" alt="{{ servicio.titulo }}">
+            <div class="row g-4 align-items-stretch">
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="industry-card">
+                        <i class="fa-solid fa-flask industry-icon-large"></i>
+                        <h3 class="fw-bold mb-3 text-dark">Farmacéuticas</h3>
+                        <div class="mb-3">
+                            <span class="normas-badge">ISO</span>
+                            <span class="normas-badge">GMP</span>
                         </div>
-                        <div class="card-body p-4">
-                            <h4 class="card-title fw-bold mb-3 text-dark">{{ servicio.titulo }}</h4>
-                            <p class="card-text text-secondary mb-4 small">{{ servicio.desc }}</p>
-                            <a href="{{ url_for('contacto') }}">MÁS DETALLES</a>
-                        </div>
+                        <p class="text-secondary small">Diseño, montaje y mantenimiento de instalaciones bajo estrictas normativas sanitarias e internacionales.</p>
+                        
+                        <ul class="client-list">
+                            <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-check"></i> Proyectos Destacados:</li>
+                            <li>Bayer</li>
+                            <li>Lab. Novocap</li>
+                        </ul>
+                        <a href="{{ url_for('proyectos') }}" class="btn btn-sm mt-3 fw-bold w-100" style="background-color: #e9ecef; color: var(--indumar-darkblue);">Ver Fotos de Trabajo</a>
                     </div>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
 
-    <section id="industrias" class="py-5 bg-dark-section text-white">
-        <div class="container py-5">
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-8" data-aos="fade-right">
-                    <h6 class="text-uppercase text-warning fw-bold ls-2">Sectores Clave</h6>
-                    <h2 class="display-4 fw-bold">Industrias que Atendemos</h2>
-                    <p class="lead opacity-75 mt-3">Experiencia comprobada en normativas GMP, FDA y exigencias sanitarias y navales.</p>
-                </div>
-            </div>
-            <div class="row g-4 mt-4">
-                {% for industria in industrias %}
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ loop.index * 150 }}">
-                    <div class="industry-card-dark">
-                        <i class="fa-solid {{ industria.icono }} industry-icon-large"></i>
-                        <h3 class="fw-bold mb-3 text-white">{{ industria.nombre }}</h3>
-                        <p class="text-light opacity-75 mb-0">{{ industria.desc }}</p>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="industry-card">
+                        <i class="fa-solid fa-wheat-awn industry-icon-large"></i>
+                        <h3 class="fw-bold mb-3 text-dark">Alimenticias</h3>
+                        <p class="text-secondary small">Desarrollo de sistemas críticos de limpieza, almacenamiento y optimización de procesos térmicos.</p>
+                        
+                        <ul class="client-list">
+                            <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-gear"></i> Tipo de Proyectos:</li>
+                            <li>Circuitos CIP (Instalaciones CIP de leches)</li>
+                            <li>Sistema de condensado y vapor</li>
+                            <li>Sistema de almacenamiento de leche (Cuadro de válvulas y cañerías)</li>
+                            <li>Upgrade de EGRON</li>
+                        </ul>
+
+                        <ul class="client-list mt-3">
+                            <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-building"></i> Clientes:</li>
+                            <li>Mastellone S.A.</li>
+                            <li>Vaquero</li>
+                            <li>Alimentos Láctea Santa Clara</li>
+                        </ul>
                     </div>
                 </div>
-                {% endfor %}
+
+                <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="industry-card">
+                        <i class="fa-solid fa-ship industry-icon-large"></i>
+                        <h3 class="fw-bold mb-3 text-dark">Instalaciones Varias</h3>
+                        <p class="text-secondary small">Trabajos pesados a medida, enfocados en el sector Naval e industrial general.</p>
+                        
+                        <ul class="client-list">
+                            <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-wrench"></i> Sector Naval & Especiales:</li>
+                            <li>Sistemas de combustibles y toma de mar</li>
+                            <li>Aguas grises, negras y potables</li>
+                            <li>Sistemas de lastre</li>
+                            <li>Alimentación de motores (combustible)</li>
+                            <li>Fabricación de tanques con refrigeración</li>
+                        </ul>
+
+                        <ul class="client-list mt-3">
+                            <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-building"></i> Clientes:</li>
+                            <li>Unidelta</li>
+                            <li>Mestrina</li>
+                            <li>Sinteplast</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -193,41 +218,41 @@
         <div class="container py-5 text-center" data-aos="fade-up">
             <h2 class="fw-bold mb-5 text-dark">Garantía de Ejecución</h2>
             <div class="row justify-content-center gap-4 gap-lg-0">
-                <div class="col-md-4 border-end"><i class="fa-solid fa-certificate text-warning fa-3x mb-3"></i><h5 class="fw-bold">Soldaduras Calificadas</h5></div>
-                <div class="col-md-4 border-end"><i class="fa-solid fa-file-circle-check text-warning fa-3x mb-3"></i><h5 class="fw-bold">Documentación Final</h5></div>
-                <div class="col-md-4"><i class="fa-solid fa-stopwatch text-warning fa-3x mb-3"></i><h5 class="fw-bold">Cumplimiento de Plazos</h5></div>
+                <div class="col-md-4 border-end"><i class="fa-solid fa-certificate fa-3x mb-3" style="color: var(--indumar-blue);"></i><h5 class="fw-bold">Soldaduras Calificadas</h5></div>
+                <div class="col-md-4 border-end"><i class="fa-solid fa-file-circle-check fa-3x mb-3" style="color: var(--indumar-blue);"></i><h5 class="fw-bold">Documentación Final</h5></div>
+                <div class="col-md-4"><i class="fa-solid fa-stopwatch fa-3x mb-3" style="color: var(--indumar-blue);"></i><h5 class="fw-bold">Cumplimiento de Plazos</h5></div>
             </div>
         </div>
     </section>
 
     <section class="py-5 bg-light">
         <div class="container py-5 text-center">
-            <h2 class="display-6 fw-bold mb-4">¿Tiene un proyecto en mente?</h2>
+            <h2 class="display-6 fw-bold mb-4 text-dark">¿Tiene un proyecto en mente?</h2>
             <p class="text-secondary mb-5">Solicite un relevamiento técnico o presupuesto sin cargo.</p>
-            <a href="{{ url_for('contacto') }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold rounded-0 shadow">SOLICITAR COTIZACIÓN</a>
+            <a href="{{ url_for('contacto') }}" class="btn btn-lg px-5 py-3 fw-bold rounded-0 shadow text-white" style="background-color: var(--indumar-blue);">SOLICITAR COTIZACIÓN</a>
         </div>
     </section>
 
-    <footer class="bg-black">
+    <footer>
         <div class="container">
             <div class="row gy-4 border-bottom border-secondary border-opacity-25 pb-5 mb-4">
                 <div class="col-md-4">
-                    <h5 class="text-white mb-4 fw-bold">INDUMAR</h5>
-                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial.</p>
+                    <img src="/static/img/logo-indumar.jpeg" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
+                    <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial especializado.</p>
                 </div>
                 
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
-                    <p class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i> {{ empresa.telefono }}</p>
-                    <p class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i> {{ empresa.email }}</p>
-                    <p class="mb-0"><i class="fa-solid fa-location-dot text-warning me-2"></i> Buenos Aires, Argentina</p>
+                    <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color: var(--indumar-blue);"></i> {{ empresa.telefono }}</p>
+                    <p class="mb-2"><i class="fa-solid fa-envelope me-2" style="color: var(--indumar-blue);"></i> {{ empresa.email }}</p>
+                    <p class="mb-0"><i class="fa-solid fa-location-dot me-2" style="color: var(--indumar-blue);"></i> Buenos Aires, Argentina</p>
                 </div>
                 
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
                     <ul class="list-unstyled fw-medium">
                         <li><a href="{{ url_for('home') }}">Inicio</a></li>
-                        <li><a href="#tipos-trabajo">Servicios</a></li>
+                        <li><a href="#industrias">Especialidades</a></li>
                         <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
                         <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
                     </ul>
