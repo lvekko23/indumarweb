@@ -10,8 +10,6 @@ app.secret_key = 'indumar_seguridad_2026'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-
-# TUS CREDENCIALES
 app.config['MAIL_USERNAME'] = 'contactoindumar@gmail.com'
 app.config['MAIL_PASSWORD'] = 'ihvb xfug ixlw goeu'
 
@@ -26,9 +24,6 @@ INFO_EMPRESA = {
     'whatsapp_link': 'https://wa.me/5491137006960'
 }
 
-# --- DATOS PARA LA PÁGINA ---
-# (Borramos SERVICIOS e INDUSTRIAS porque ahora los cuadros están fijos en el HTML)
-
 STATS = [
     {'numero': 'GMP', 'texto': 'Normativas'},
     {'numero': 'ISO', 'texto': 'Certificación'},
@@ -39,29 +34,37 @@ STATS = [
 
 @app.route('/')
 def home():
-    return render_template('index.html', 
-                           empresa=INFO_EMPRESA, 
-                           stats=STATS)
+    return render_template('index.html', empresa=INFO_EMPRESA, stats=STATS)
 
-@app.route('/proyectos')
-def proyectos():
-    # Genera la lista de fotos automáticamente: obra1.jpg hasta obra18.jpg
-    lista_fotos = [f"obra{i}.jpg" for i in range(1, 19)]
-    
-    return render_template('proyectos.html', 
-                           empresa=INFO_EMPRESA,
-                           fotos=lista_fotos)
+# --- LAS 3 RUTAS DE GALERÍAS (CON FORMATO WINDOWS) ---
+
+@app.route('/farmaceuticas')
+def farma():
+    # Busca 15 fotos: farma (1).jpg hasta farma (15).jpg
+    fotos = [f"farma ({i}).jpg" for i in range(1, 16)] 
+    return render_template('galeria.html', empresa=INFO_EMPRESA, sector="Farmacéuticas", fotos=fotos)
+
+@app.route('/alimenticias')
+def alimen():
+    # Busca 15 fotos: alimen (1).jpg hasta alimen (15).jpg
+    fotos = [f"alimen ({i}).jpg" for i in range(1, 16)]
+    return render_template('galeria.html', empresa=INFO_EMPRESA, sector="Alimenticias", fotos=fotos)
+
+@app.route('/naval')
+def naval():
+    # Busca 55 fotos: naval (1).jpg hasta naval (55).jpg
+    fotos = [f"naval ({i}).jpg" for i in range(1, 56)]
+    return render_template('galeria.html', empresa=INFO_EMPRESA, sector="Naval", fotos=fotos)
 
 @app.route('/contacto', methods=['GET', 'POST'])
 def contacto():
     if request.method == 'POST':
         nombre = request.form.get('nombre')
         email_cliente = request.form.get('email')
-        telefono = request.form.get('telefono')
-        empresa_cliente = request.form.get('empresa')
+        asunto = request.form.get('asunto')
         mensaje = request.form.get('mensaje')
 
-        msg = Message(subject=f"NUEVO CLIENTE WEB: {nombre}",
+        msg = Message(subject=f"NUEVO CLIENTE WEB: {asunto}",
                       sender='contactoindumar@gmail.com',
                       recipients=['admarin74@gmail.com'])
 
@@ -71,16 +74,14 @@ def contacto():
         ------------------------------------------------------
         
         CLIENTE: {nombre}
-        EMPRESA: {empresa_cliente}
-        TELÉFONO: {telefono}
         EMAIL:   {email_cliente}
+        ASUNTO:  {asunto}
         
         MENSAJE:
         {mensaje}
         
         ------------------------------------------------------
         """
-
         try:
             mail.send(msg)
             flash('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.', 'success')

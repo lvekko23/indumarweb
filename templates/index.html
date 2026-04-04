@@ -16,38 +16,19 @@
 
         /* NAVBAR */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
-        .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; }
+        .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; transition: 0.3s; }
         .nav-link:hover, .nav-link.active { color: var(--indumar-blue) !important; }
         .btn-nav { background: var(--indumar-blue); color: white !important; font-weight: 700; border-radius: 0; transition: 0.3s; }
         .btn-nav:hover { background: var(--indumar-darkblue); }
         .logo-img { max-height: 45px; object-fit: contain; }
+        .dropdown-item { font-weight: 600; color: var(--indumar-darkblue); }
+        .dropdown-item:hover { background-color: rgba(98, 177, 246, 0.1); color: var(--indumar-blue); }
 
         /* HERO SLIDER */
-        .hero { 
-            height: 90vh; 
-            position: relative;
-            display: flex; 
-            align-items: center; 
-            background-color: #000;
-            overflow: hidden;
-        }
-        .hero-slider-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; 
-            z-index: 0;
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-        }
+        .hero { height: 90vh; position: relative; display: flex; align-items: center; background-color: #000; overflow: hidden; }
+        .hero-slider-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-attachment: fixed; z-index: 0; opacity: 1; transition: opacity 0.5s ease-in-out; }
         .hero-slider-img.fade-out { opacity: 0.2; }
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,34,68,0.7), rgba(0,0,0,0.6)); 
-            z-index: 1;
-        }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,34,68,0.7), rgba(0,0,0,0.6)); z-index: 1; }
         .hero-content { position: relative; z-index: 2; width: 100%; }
         .hero-line { width: 80px; height: 6px; background: var(--indumar-blue); margin-bottom: 25px; }
         .hero-subtitle { color: var(--indumar-blue); letter-spacing: 3px; font-weight: 700; text-transform: uppercase;}
@@ -58,7 +39,7 @@
         .stat-number { font-size: 2.5rem; font-weight: 800; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
         .stat-text { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; opacity: 0.9; }
 
-        /* SECCIÓN INDUSTRIAS (CUADROS) */
+        /* SECCIÓN INDUSTRIAS */
         .bg-dark-section { background-color: #f8f9fa; color: #333; }
         .industry-card { background: white; padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 5px solid var(--indumar-blue); transition: all 0.3s ease; height: 100%; }
         .industry-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top-color: var(--indumar-darkblue); }
@@ -70,9 +51,8 @@
 
         /* FOOTER */
         footer { background: var(--indumar-darkblue); color: #ccc; padding: 70px 0 20px; font-size: 0.9rem; }
-        footer a { color: #ccc; text-decoration: none; }
+        footer a { color: #ccc; text-decoration: none; transition: 0.3s;}
         footer a:hover { color: white; }
-        
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
     </style>
@@ -91,7 +71,18 @@
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link active" href="{{ url_for('home') }}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#industrias">Especialidades</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('proyectos') }}">Proyectos</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Proyectos
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('farma') }}">Farmacéuticas</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('alimen') }}">Alimenticias</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('naval') }}">Naval</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-nav px-4 py-2" href="{{ url_for('contacto') }}">SOLICITAR COTIZACIÓN</a>
@@ -104,7 +95,6 @@
     <header id="inicio" class="hero">
         <div class="hero-slider-img" style="background-image: url('/static/galeria/portada.jpg');"></div>
         <div class="hero-overlay"></div>
-
         <div class="container hero-content" data-aos="fade-up">
             <div class="row">
                 <div class="col-lg-10">
@@ -153,13 +143,12 @@
                             <span class="normas-badge">GMP</span>
                         </div>
                         <p class="text-secondary small">Diseño, montaje y mantenimiento de instalaciones bajo estrictas normativas sanitarias e internacionales.</p>
-                        
                         <ul class="client-list">
                             <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-check"></i> Proyectos Destacados:</li>
                             <li>Bayer</li>
                             <li>Lab. Novocap</li>
                         </ul>
-                        <a href="{{ url_for('proyectos') }}" class="btn btn-sm mt-3 fw-bold w-100" style="background-color: #e9ecef; color: var(--indumar-darkblue);">Ver Fotos de Trabajo</a>
+                        <a href="{{ url_for('farma') }}" class="btn btn-sm mt-3 fw-bold w-100" style="background-color: #e9ecef; color: var(--indumar-darkblue);">Ver Fotos de Trabajo</a>
                     </div>
                 </div>
 
@@ -168,21 +157,20 @@
                         <i class="fa-solid fa-wheat-awn industry-icon-large"></i>
                         <h3 class="fw-bold mb-3 text-dark">Alimenticias</h3>
                         <p class="text-secondary small">Desarrollo de sistemas críticos de limpieza, almacenamiento y optimización de procesos térmicos.</p>
-                        
                         <ul class="client-list">
                             <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-gear"></i> Tipo de Proyectos:</li>
                             <li>Circuitos CIP (Instalaciones CIP de leches)</li>
                             <li>Sistema de condensado y vapor</li>
-                            <li>Sistema de almacenamiento de leche (Cuadro de válvulas y cañerías)</li>
+                            <li>Sistema de almacenamiento de leche (Cuadro de válvulas)</li>
                             <li>Upgrade de EGRON</li>
                         </ul>
-
                         <ul class="client-list mt-3">
                             <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-building"></i> Clientes:</li>
                             <li>Mastellone S.A.</li>
                             <li>Vaquero</li>
                             <li>Alimentos Láctea Santa Clara</li>
                         </ul>
+                        <a href="{{ url_for('alimen') }}" class="btn btn-sm mt-3 fw-bold w-100" style="background-color: #e9ecef; color: var(--indumar-darkblue);">Ver Fotos de Trabajo</a>
                     </div>
                 </div>
 
@@ -191,22 +179,21 @@
                         <i class="fa-solid fa-ship industry-icon-large"></i>
                         <h3 class="fw-bold mb-3 text-dark">Instalaciones Varias</h3>
                         <p class="text-secondary small">Trabajos pesados a medida, enfocados en el sector Naval e industrial general.</p>
-                        
                         <ul class="client-list">
                             <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-wrench"></i> Sector Naval & Especiales:</li>
                             <li>Sistemas de combustibles y toma de mar</li>
                             <li>Aguas grises, negras y potables</li>
                             <li>Sistemas de lastre</li>
-                            <li>Alimentación de motores (combustible)</li>
+                            <li>Alimentación de motores</li>
                             <li>Fabricación de tanques con refrigeración</li>
                         </ul>
-
                         <ul class="client-list mt-3">
                             <li class="fw-bold text-dark mb-2"><i class="fa-solid fa-building"></i> Clientes:</li>
                             <li>Unidelta</li>
                             <li>Mestrina</li>
                             <li>Sinteplast</li>
                         </ul>
+                        <a href="{{ url_for('naval') }}" class="btn btn-sm mt-3 fw-bold w-100" style="background-color: #e9ecef; color: var(--indumar-darkblue);">Ver Trabajos Navales</a>
                     </div>
                 </div>
 
@@ -240,20 +227,17 @@
                     <img src="{{ url_for('static', filename='logo-indumar.png') }}" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
                     <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial especializado.</p>
                 </div>
-                
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
                     <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color: var(--indumar-blue);"></i> {{ empresa.telefono }}</p>
                     <p class="mb-2"><i class="fa-solid fa-envelope me-2" style="color: var(--indumar-blue);"></i> {{ empresa.email }}</p>
                     <p class="mb-0"><i class="fa-solid fa-location-dot me-2" style="color: var(--indumar-blue);"></i> Buenos Aires, Argentina</p>
                 </div>
-                
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
                     <ul class="list-unstyled fw-medium">
                         <li><a href="{{ url_for('home') }}">Inicio</a></li>
                         <li><a href="#industrias">Especialidades</a></li>
-                        <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
                         <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
                     </ul>
                 </div>
@@ -277,15 +261,9 @@
                 '/static/galeria/portada3.jpg',
                 '/static/galeria/portada4.jpg'
             ];
-
-            images.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-
+            images.forEach(src => { const img = new Image(); img.src = src; });
             let currentIndex = 0;
             const sliderImg = document.querySelector('.hero-slider-img');
-
             function cycleImages() {
                 sliderImg.classList.add('fade-out');
                 setTimeout(() => {

@@ -10,74 +10,33 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* NUEVOS COLORES AZULES */
         :root { --dark: #111111; --indumar-blue: #62b1f6; --indumar-darkblue: #002244; }
         body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; }
         h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; }
 
-        /* NAVBAR CON LOGO NUEVO */
         .navbar { background: white; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
         .nav-link { color: #555 !important; font-weight: 600; font-size: 0.9rem; margin-left: 15px; text-transform: uppercase; transition: 0.3s; }
         .nav-link:hover, .nav-link.active { color: var(--indumar-blue) !important; }
         .logo-img { max-height: 45px; object-fit: contain; }
+        .dropdown-item { font-weight: 600; color: var(--indumar-darkblue); }
+        .dropdown-item:hover { background-color: rgba(98, 177, 246, 0.1); color: var(--indumar-blue); }
 
-        /* HEADER CONTACTO */
-        .contact-header {
-            background: linear-gradient(135deg, var(--indumar-darkblue) 0%, #00152b 100%);
-            padding: 80px 0;
-            color: white;
-            text-align: center;
-            border-bottom: 5px solid var(--indumar-blue);
-        }
-
-        /* TARJETAS DE INFO */
-        .info-card {
-            background: white;
-            padding: 40px;
-            text-align: center;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            height: 100%;
-            transition: 0.3s;
-            border-bottom: 4px solid transparent;
-        }
+        .contact-header { background: linear-gradient(135deg, var(--indumar-darkblue) 0%, #00152b 100%); padding: 80px 0; color: white; text-align: center; border-bottom: 5px solid var(--indumar-blue); }
+        .info-card { background: white; padding: 40px; text-align: center; border: none; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); height: 100%; transition: 0.3s; border-bottom: 4px solid transparent; }
         .info-card:hover { transform: translateY(-5px); border-bottom-color: var(--indumar-blue); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .icon-circle {
-            width: 70px; height: 70px;
-            background: rgba(98, 177, 246, 0.1);
-            color: var(--indumar-blue);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 24px;
-            transition: 0.3s;
-        }
+        .icon-circle { width: 70px; height: 70px; background: rgba(98, 177, 246, 0.1); color: var(--indumar-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px; transition: 0.3s; }
         .info-card:hover .icon-circle { background: var(--indumar-blue); color: white; }
-
-        /* Enlaces de las tarjetas */
-        .card-link {
-            text-decoration: none;
-            color: var(--indumar-darkblue);
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: 0.3s;
-            display: inline-block;
-            margin-top: 10px;
-        }
+        .card-link { text-decoration: none; color: var(--indumar-darkblue); font-weight: 700; font-size: 1.1rem; transition: 0.3s; display: inline-block; margin-top: 10px; }
         .card-link:hover { color: var(--indumar-blue); }
-
-        /* FORMULARIO */
+        
         .form-control { padding: 15px; border-radius: 4px; border: 1px solid #ddd; background: #fff; }
         .form-control:focus { border-color: var(--indumar-blue); box-shadow: 0 0 0 0.2rem rgba(98, 177, 246, 0.25); }
         .btn-send { background: var(--indumar-blue); color: white; font-weight: 700; padding: 15px 40px; border: none; border-radius: 4px; transition: 0.3s; }
         .btn-send:hover { background: var(--indumar-darkblue); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,34,68,0.2); }
-
-        /* FOOTER */
+        
         footer { background: var(--indumar-darkblue); color: #ccc; padding: 70px 0 20px; font-size: 0.9rem; }
         footer a { color: #ccc; text-decoration: none; transition: 0.3s; }
         footer a:hover { color: white; }
-
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); background: #20b852; }
     </style>
@@ -95,8 +54,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#industrias">Especialidades</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('proyectos') }}">Proyectos</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Proyectos
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('farma') }}">Farmacéuticas</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('alimen') }}">Alimenticias</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('naval') }}">Naval</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item"><a class="nav-link active" href="{{ url_for('contacto') }}">Contacto</a></li>
                 </ul>
             </div>
@@ -116,25 +85,18 @@
                 
                 <div class="col-lg-4">
                     <div class="d-flex flex-column gap-4">
-                        
                         <div class="info-card" data-aos="fade-up">
                             <div class="icon-circle"><i class="fa-brands fa-whatsapp"></i></div>
                             <h5 class="fw-bold text-dark">WhatsApp Directo</h5>
                             <p class="text-secondary mb-0 small">Atención Personalizada</p>
-                            <a href="{{ empresa.whatsapp_link }}" target="_blank" class="card-link">
-                                {{ empresa.telefono }}
-                            </a>
+                            <a href="{{ empresa.whatsapp_link }}" target="_blank" class="card-link">{{ empresa.telefono }}</a>
                         </div>
-                        
                         <div class="info-card" data-aos="fade-up" data-aos-delay="100">
                             <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
                             <h5 class="fw-bold text-dark">Escríbanos</h5>
                             <p class="text-secondary mb-0 small">Solicite presupuesto por email</p>
-                            <a href="mailto:{{ empresa.email }}" class="card-link" style="font-size: 1rem;">
-                                {{ empresa.email }}
-                            </a>
+                            <a href="mailto:{{ empresa.email }}" class="card-link" style="font-size: 1rem;">{{ empresa.email }}</a>
                         </div>
-
                     </div>
                 </div>
 
@@ -152,21 +114,11 @@
 
                         <form action="{{ url_for('contacto') }}" method="POST">
                             <div class="row g-3">
-                                <div class="col-md-6">
-                                    <input type="text" name="nombre" class="form-control" placeholder="Su Nombre" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="email" name="email" class="form-control" placeholder="Su Email" required>
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" name="asunto" class="form-control" placeholder="Asunto" required>
-                                </div>
-                                <div class="col-12">
-                                    <textarea name="mensaje" rows="6" class="form-control" placeholder="¿En qué podemos ayudarlo?" required></textarea>
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <button type="submit" class="btn btn-send w-100">ENVIAR CONSULTA</button>
-                                </div>
+                                <div class="col-md-6"><input type="text" name="nombre" class="form-control" placeholder="Su Nombre" required></div>
+                                <div class="col-md-6"><input type="email" name="email" class="form-control" placeholder="Su Email" required></div>
+                                <div class="col-12"><input type="text" name="asunto" class="form-control" placeholder="Asunto" required></div>
+                                <div class="col-12"><textarea name="mensaje" rows="6" class="form-control" placeholder="¿En qué podemos ayudarlo?" required></textarea></div>
+                                <div class="col-12 mt-4"><button type="submit" class="btn btn-send w-100">ENVIAR CONSULTA</button></div>
                             </div>
                         </form>
                     </div>
@@ -183,25 +135,21 @@
                     <img src="{{ url_for('static', filename='logo-indumar.png') }}" alt="INDUMAR" class="mb-4" style="height: 40px; filter: brightness(0) invert(1); opacity: 0.8;">
                     <p class="opacity-75">Ingeniería, montaje y mantenimiento industrial especializado.</p>
                 </div>
-                
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">CONTACTO</h5>
                     <p class="mb-2"><i class="fa-solid fa-phone me-2" style="color: var(--indumar-blue);"></i> {{ empresa.telefono }}</p>
                     <p class="mb-2"><i class="fa-solid fa-envelope me-2" style="color: var(--indumar-blue);"></i> {{ empresa.email }}</p>
                     <p class="mb-0"><i class="fa-solid fa-location-dot me-2" style="color: var(--indumar-blue);"></i> Buenos Aires, Argentina</p>
                 </div>
-                
                 <div class="col-md-4">
                     <h5 class="text-white mb-4 fw-bold">NAVEGACIÓN</h5>
                     <ul class="list-unstyled fw-medium">
                         <li><a href="{{ url_for('home') }}">Inicio</a></li>
-                        <li><a href="{{ url_for('home') }}#industrias">Especialidades</a></li>
-                        <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
                         <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="text-center pb-4 opacity-50 small">© 2026 INDUMAR. Todos los derechos reservados.</div>
+            <div class="text-center pb-4 opacity-50 small">© 2026 {{ empresa.nombre }}. Todos los derechos reservados.</div>
         </div>
     </footer>
 
