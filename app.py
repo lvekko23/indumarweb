@@ -36,24 +36,24 @@ STATS = [
 def home():
     return render_template('index.html', empresa=INFO_EMPRESA, stats=STATS)
 
-# --- LAS 3 RUTAS DE GALERÍAS (CON FORMATO WINDOWS) ---
+# --- LAS 3 RUTAS DE GALERÍAS (CON FORMATO .jpeg Y PARÉNTESIS) ---
 
 @app.route('/farmaceuticas')
 def farma():
-    # Busca 15 fotos: farma (1).jpg hasta farma (15).jpg
-    fotos = [f"farma ({i}).jpg" for i in range(1, 16)] 
+    # Busca 15 fotos: farma (1).jpeg hasta farma (15).jpeg
+    fotos = [f"farma ({i}).jpeg" for i in range(1, 16)] 
     return render_template('galeria.html', empresa=INFO_EMPRESA, sector="Farmacéuticas", fotos=fotos)
 
 @app.route('/alimenticias')
 def alimen():
-    # Busca 15 fotos: alimen (1).jpg hasta alimen (15).jpg
-    fotos = [f"alimen ({i}).jpg" for i in range(1, 16)]
+    # Busca 15 fotos: alimen (1).jpeg hasta alimen (15).jpeg
+    fotos = [f"alimen ({i}).jpeg" for i in range(1, 16)]
     return render_template('galeria.html', empresa=INFO_EMPRESA, sector="Alimenticias", fotos=fotos)
 
 @app.route('/naval')
 def naval():
-    # Busca 55 fotos: naval (1).jpg hasta naval (55).jpg
-    fotos = [f"naval ({i}).jpg" for i in range(1, 56)]
+    # Busca 55 fotos: naval (1).jpeg hasta naval (55).jpeg
+    fotos = [f"naval ({i}).jpeg" for i in range(1, 56)]
     return render_template('galeria.html', empresa=INFO_EMPRESA, sector="Naval", fotos=fotos)
 
 @app.route('/contacto', methods=['GET', 'POST'])
